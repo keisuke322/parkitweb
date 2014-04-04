@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Parkit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script type="text/javascript">
+		//window.alert("hello");
+		
+		var storageNotification = "Web Storage機能をチェック";
+		if (typeof localStorage == 'undefined') {
+			storageNotification = "Web Storage機能がありません";
+		} else {
+			storageNotification = "Web Storage機能が使用可能です";
+		}
+		//document.getElementById('notification').innerHTML = storageNotification;
+		
+		var storage = localStorage;
+	
+		// logParkページがDOMに追加されてからの処理
+		$(document).delegate("#logPark", "pagecreate", function() {
+			document.getElementById('notification').innerHTML = storageNotification;
+		});
+		
+		function setSessionStorage() {
+            var today = new Date();
+			var key = today.getTime();
+            var value = document.getElementById("textinput").value;
+            //alert(value);
+            
+            if (key && value) {
+                storage.clear();
+                storage.setItem(key, value);
+            }
+            
+            displayParkingInfo();
+            //document.location = "#home";
+		}
+        
+        function displayParkingInfo() {
+            if (storage.length > 0) {
+                //alert(storage.key(0));
+                //alert(storage.getItem(storage.key(0)));
+                document.getElementById("parkingNumber").innerHTML = "@ " + storage.getItem(storage.key(0));
+                var parkedTime = parseInt(storage.key(0));
+                var parkedDate = new Date(parkedTime);
+                //alert(parkedTime);
+                var nowTime = new Date().getTime();
+                
+                var passedSeconds = parseInt((nowTime - parkedTime) / 1000);
+                //alert(passedSeconds);
+                var hour = parseInt(passedSeconds / 3600);
+                var min = parseInt((passedSeconds / 60) % 60);
+                var sec = passedSeconds % 60;
+                
+                // 数値が1桁の場合、頭に0を付けて2桁で表示する指定
+                if(hour < 10) { hour = "0" + hour; }
+                if(min < 10) { min = "0" + min; }
+                if(sec < 10) { sec = "0" + sec; }
+                
+                document.getElementById("parkedTime").innerHTML = hour + ":" + min + ":" + sec;
+                
+                document.getElementById("parkingDateTime").innerHTML = parkedDate.toLocaleDateString() + " " + parkedDate.toLocaleTimeString();
+                
+                setTimeout("displayParkingInfo()", 1000);
+            }
+        }
+        
+        function init() {
+            displayParkingInfo();
+        }
+</script>
+<style>
+h1 {
+    text-align: center;
+}
+#parkingNumber {
+    font-size: 40px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+#parkedTime {
+    font-size: 70px;
+    text-align: center;
+    margin: 40px 0px;
+    padding: 0px;
+}
+#parkingDateTime {
+    text-align: center;
+}
+</style>
+</head>
+
+<body onload="init()">
+    <div id="home" data-role="page">
+        <header data-role="header">
+            <h1>PARKIT</h1>
+        </header>
+        <div data-role="content">
+            <h1>Parking Info.</h1>
+            <p id="parkingNumber"></p>
+            <p id="parkedTime"></p>
+            <p id="parkingDateTime"></p>
+            <a href="#logPark" data-role="button">Log</a>
+            <!--
+            <a href="#checkPark" data-role="button">Check</a>
+            -->
+        </div>
+        <footer data-role="footer">
+            <h1>ksk studio</h1>
+        </footer>
+    </div>
+
+    <div id="logPark" data-role="page">
+        <header data-role="header">
+            <h1>Log your park</h1>
+        </header>
+        <div data-role="content">
+            <p>Record your parking information</p>
+            <p id="notification">notification</p>
+            <div data-role="fieldcontain">
+              <label for="textinput">Lot No.</label>
+              <input type="tel" name="textinput" id="textinput" value=""  />
+            </div>
+            <div data-role="controlgroup" data-type="horizontal">
+            <!--
+              <button data-icon="arrow-r" onClick="setSessionStorage()">Save</button>
+            -->
+              <a href="#home" data-role="button" data-icon="arrow-r" onClick="setSessionStorage()">Save</a>
+            </div>
+        </div>
+        <footer data-role="footer">
+            <h1>ksk studio</h1>
+        </footer>
+    </div>
+    
+    <!--
+    <div id="checkPark" data-role="page">
+        <header data-role="header">
+            <h1>Check your park</h1>
+        </header>
+        <div data-role="content">
+            <p>Check your parking information</p>
+            <a href="#home" data-role="button">&lt; Home</a>
+        </div>
+        <footer data-role="footer">
+            <h1>ksk studio</h1>
+        </footer>
+    </div>
+    -->
+        
+</body>
+</html>
