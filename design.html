@@ -9,70 +9,43 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/parkit.js"></script>
 </head>
 
-<body onload="init()">
+<body>
     <div id="home" data-role="page" data-theme="a">
         <header data-role="header">
             <h1>PARKIT</h1>
         </header>
         <div class="ui-content" role="main">
             <h1>P</h1>
-            <a class="ui-btn ui-icon-clock ui-btn-icon-top" href="#parkNumberInput">2014/4/7 16:32:24<br/>入庫</a>
+            <a id="timestampButton" class="ui-btn ui-icon-clock128 ui-btn-icon-top" href="#parkNumberInput">入庫</a>
         </div>
     </div>
 
     <div id="parkNumberInput" data-role="page">
         <header data-role="header">
             <a href="#home" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Cancel</a>
-            <h1>駐車番号</h1>
+            <h1>駐車情報</h1>
         </header>
         <div class="ui-content" role="main">
-            <p>2014/4/7 16:32:24 入庫</p>
             <div class="ui-field-contain">
-            	<!--
-              <label for="textinput">駐車番号</label>
-              -->
-              <input type="number" name="textinput" id="textinput" placeholder="駐車番号"  />
+              <input type="number" name="textinput" id="textinput" placeholder="駐車番号" />
             </div>
             
+            <a class="ui-btn ui-icon-carat-r ui-btn-icon-right" data-position-to="origin" data-transition="pop" href="#dateDialog">2014/4/7</a>
+            <a class="ui-btn ui-icon-carat-r ui-btn-icon-right" href="#timeDialog">16:32:24</a>
             <a class="ui-btn ui-icon-check ui-btn-icon-top" href="#home">確定</a>
-            <!--
-            <fieldset class="ui-grid-a">
-            		<div class="ui-block-a"><a class="ui-btn" href="#home">記録</a></div>
-                 <div class="ui-block-b"><a class="ui-btn ui-btn-b" href="#home">キャンセル</a></div>
-            </fieldset>
-            -->
-            
-            <!--
-            <div data-role="controlgroup" data-type="horizontal">
-              <a href="#home" data-role="button" data-icon="arrow-l">Cancel</a>
-              <a href="#home" data-role="button" data-icon="arrow-r" onClick="setSessionStorage()">Save</a>
-            </div>
-            -->
+
         </div>
     </div>
     
-    <div data-role="page" data-dialog="true" id="dialog1">
+    <!--
+    <div data-role="popup" data-dialog="true" id="dateDialog">
 		<div class="ui-content" role="main">
     			<h1>ダイアログ例</h1>
   		</div>
 	</div>
-    
-    <!--
-    <div id="checkPark" data-role="page">
-        <header data-role="header">
-            <h1>Check your park</h1>
-        </header>
-        <div data-role="content">
-            <p>Check your parking information</p>
-            <a href="#home" data-role="button">&lt; Home</a>
-        </div>
-        <footer data-role="footer">
-            <h1>ksk studio</h1>
-        </footer>
-    </div>
     -->
-        
 </body>
 </html>
