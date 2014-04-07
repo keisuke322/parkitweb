@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Parkit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/parkit.js"></script>
+</head>
+
+<body>
+    <div id="home" data-role="page" data-theme="a">
+        <header data-role="header">
+            <h1>PARKIT</h1>
+        </header>
+        <div class="ui-content" role="main">
+            <h1>P</h1>
+            <a id="timestampButton" class="ui-btn ui-icon-clock128 ui-btn-icon-top" href="#parkNumberInput">入庫</a>
+            <a class="ui-btn" href="#parkNumberInput"><img src="images/clock128.png"><br/><span id="refreshTimestamp">あ</span><br/>入庫</a>
+        </div>
+    </div>
+
+    <div id="parkNumberInput" data-role="page">
+        <header data-role="header">
+            <a href="#home" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Cancel</a>
+            <h1>駐車情報</h1>
+        </header>
+        <div class="ui-content" role="main">
+            <div class="ui-field-contain">
+              <input type="number" name="textinput" id="textinput" placeholder="駐車番号" />
+            </div>
+            
+            <a class="ui-btn ui-icon-carat-r ui-btn-icon-right" data-position-to="origin" data-transition="pop" href="#dateDialog">2014/4/7</a>
+            <a class="ui-btn ui-icon-carat-r ui-btn-icon-right" href="#timeDialog">16:32:24</a>
+            <a class="ui-btn ui-icon-check ui-btn-icon-top" href="#home">確定</a>
+
+        </div>
+    </div>
+    
+    <!--
+    <div data-role="popup" data-dialog="true" id="dateDialog">
+		<div class="ui-content" role="main">
+    			<h1>ダイアログ例</h1>
+  		</div>
+	</div>
+    -->
+</body>
+</html>
