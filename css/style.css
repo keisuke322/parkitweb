@@ -7,7 +7,7 @@ h1 {
     margin: 0px;
     padding: 0px;
 }
-#parkedTime {
+#parkingTime {
     font-size: 70px;
     text-align: center;
     margin: 40px 0px;
@@ -37,4 +37,12 @@ h1 {
 	font-size: 40px;
 	text-align: center;
 	*/
+}
+a img {
+  margin: 30px;  
+}
+
+#parkInfo p {
+    margin: 0px;
+    text-align: center;
 }
