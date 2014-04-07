@@ -18,16 +18,17 @@
         </header>
         <div class="ui-content" role="main">
             <h1>P</h1>
-            <a href="#parkNumberInput" class="ui-btn">入庫</a>
-            <a class="ui-btn" href="#dialog1" >ダイアログ</a>
+            <a class="ui-btn ui-icon-clock ui-btn-icon-top" href="#parkNumberInput">2014/4/7 16:32:24<br/>入庫</a>
         </div>
     </div>
 
     <div id="parkNumberInput" data-role="page">
-        <header data-role="header" data-position="fixed" data-add-back-btn="true" data-back-btn-text="戻る">
+        <header data-role="header">
+            <a href="#home" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Cancel</a>
             <h1>駐車番号</h1>
         </header>
         <div class="ui-content" role="main">
+            <p>2014/4/7 16:32:24 入庫</p>
             <div class="ui-field-contain">
             	<!--
               <label for="textinput">駐車番号</label>
@@ -35,10 +36,13 @@
               <input type="number" name="textinput" id="textinput" placeholder="駐車番号"  />
             </div>
             
+            <a class="ui-btn ui-icon-check ui-btn-icon-top" href="#home">確定</a>
+            <!--
             <fieldset class="ui-grid-a">
             		<div class="ui-block-a"><a class="ui-btn" href="#home">記録</a></div>
                  <div class="ui-block-b"><a class="ui-btn ui-btn-b" href="#home">キャンセル</a></div>
             </fieldset>
+            -->
             
             <!--
             <div data-role="controlgroup" data-type="horizontal">
