@@ -6,10 +6,10 @@
     <title>Parkit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
     <script type="text/javascript">
-		//window.alert("hello");
 		
 		var storageNotification = "Web Storage機能をチェック";
 		if (typeof localStorage == 'undefined') {
@@ -17,7 +17,6 @@
 		} else {
 			storageNotification = "Web Storage機能が使用可能です";
 		}
-		//document.getElementById('notification').innerHTML = storageNotification;
 		
 		var storage = localStorage;
 	
@@ -74,26 +73,6 @@
             displayParkingInfo();
         }
 </script>
-<style>
-h1 {
-    text-align: center;
-}
-#parkingNumber {
-    font-size: 40px;
-    text-align: center;
-    margin: 0px;
-    padding: 0px;
-}
-#parkedTime {
-    font-size: 70px;
-    text-align: center;
-    margin: 40px 0px;
-    padding: 0px;
-}
-#parkingDateTime {
-    text-align: center;
-}
-</style>
 </head>
 
 <body onload="init()">
