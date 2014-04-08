@@ -39,7 +39,9 @@ h1 {
 	*/
 }
 a img {
-  margin: 30px;  
+    margin: 30px;
+    width: 128px;
+    height: 128px;
 }
 
 #parkInfo p {
