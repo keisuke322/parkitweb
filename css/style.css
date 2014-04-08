@@ -1,4 +1,5 @@
-h1 {
+.ui-content h1 {
+    color: #999999;
     text-align: center;
 }
 #parkingNumber {
@@ -21,23 +22,7 @@ h1 {
     background-color: transparent;
     background-size: contain;
 }
-#home div .mainbutton {
-	background: rgb(55, 143, 247);
-	font: 58px;
-	line-height: 1em;
-	margin: 176px auto 0;
-	padding: 100px 0;
-	text-align: center;
-	width: 80%;
-	/*
-	margin: auto 0px;
-	padding: 100px 0px;
-	background-color: #41A9E4;
-	text-decoration: none;
-	font-size: 40px;
-	text-align: center;
-	*/
-}
+
 a img {
     margin: 30px;
     width: 128px;
@@ -45,6 +30,19 @@ a img {
 }
 
 #parkInfo p {
-    margin: 0px;
     text-align: center;
+}
+
+#parkingTimeForInput {
+    font-size: 40px;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+#parkInfoSubmitButton {
+    margin: 40px 0px;
+}
+
+#finishButton {
+    margin: 40px 0px;
 }

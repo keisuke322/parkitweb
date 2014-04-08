@@ -16,3 +16,6 @@ function displayDateTime() {
     setTimeout(displayDateTime, 1000);
 }
 
+function submitParkInfo() {
+    $("#parkedDateTimeFieldSet").collapsible("option", "collapsed", true);
+}

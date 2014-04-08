@@ -18,22 +18,23 @@
             <h1>PARKIT</h1>
         </header>
         <div class="ui-content" role="main">
-            <h1>P</h1>
+            <h1>Start</h1>
             <a class="ui-btn" href="#parkInfoInput"><img src="images/clock.svg"><br/><span id="refreshTimestamp">あ</span><br/>入庫</a>
         </div>
     </div>
 
     <div id="parkInfoInput" data-role="page">
         <header data-role="header">
-            <a href="#home" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Cancel</a>
-            <h1>駐車情報</h1>
+            <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Cancel</a>
+            <h1>PARKIT</h1>
         </header>
         <div class="ui-content" role="main">
+            <h1>INPUT</h1>
             <div class="ui-field-contain">
               <input type="number" name="textinput" id="textinput" placeholder="駐車番号を入力" />
             </div>
             
-            <p id="parkingTimes">01:33:29</p>
+            <p id="parkingTimeForInput">&#8250;&#8250; 01:33:29</p>
             
             <!--
             <a class="ui-btn ui-icon-carat-r ui-btn-icon-right" data-position-to="origin" data-transition="pop" href="#dateDialog">2014/4/7</a>
@@ -41,28 +42,31 @@
             -->
             
             <form>
-                <fieldset data-role="collapsible">
+                <fieldset id="parkedDateTimeFieldSet" data-role="collapsible">
                     <legend>駐車時刻</legend>
-                    <input name="parkedDate" id="parkedDateInput" value="2014-04-07" type="date">
-                    <input name="parkedTime" id="parkedTimeInput" value="16:32" type="time">
+                    <input type="date" name="parkedDate" id="parkedDateInput" value="2014-04-07">
+                    <input type="time" name="parkedTime" id="parkedTimeInput" value="16:32">
                 </fieldset>
             </form>
             
-            <a class="ui-btn ui-icon-check ui-btn-icon-top" href="#parkInfo">確定</a>
+            <a class="ui-btn ui-icon-check ui-btn-icon-top" href="#parkInfo" id="parkInfoSubmitButton" onclick="submitParkInfo()">確定</a>
 
         </div>
     </div>
     
     <div id="parkInfo" data-role="page">
         <header data-role="header">
-            <h1>駐車情報</h1>
+            <h1>PARKIT</h1>
             <a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-right ui-icon-carat-r" href="#parkInfoInput">Edit</a>
         </header>
         <div class="ui-content" role="main">
-            <p id="parkingNumber">C319</p>
-            <p id="parkingTime">01:33:29</p>
-            <p id="parkedTime">2014/4/7 22:20:14</p>
-            <a class="ui-btn" href="#home">終了</a>
+            <h1>PARKING INFO</h1>
+            <div class="ui-body">
+                <p id="parkingNumber">C319</p>
+                <p id="parkingTime">01:33:29</p>
+                <p id="parkedTime">2014/4/7 22:20:14</p>
+            </div>
+            <a class="ui-btn" href="#home" id="finishButton">終了</a>
         </div>
         
     </div>
