@@ -13,16 +13,22 @@
 </head>
 
 <body>
+    <!-- home page -->
     <div id="home" data-role="page">
         <header data-role="header">
             <h1>PARKIT</h1>
         </header>
         <div class="ui-content" role="main">
             <h1>Start</h1>
-            <a class="ui-btn" href="#parkInfoInput"><img src="images/clock.svg"><br/><span id="refreshTimestamp">あ</span><br/>入庫</a>
+            <a class="ui-btn" href="#parkInfoInput" onclick="submitPark()">
+                <img src="images/clock.svg"><br/>
+                <p id="refreshCurrentDateTime"></p>
+                <p>&nbsp;&nbsp; 入庫 &#8250;&#8250;</p>
+            </a>
         </div>
     </div>
 
+    <!-- park info input page -->
     <div id="parkInfoInput" data-role="page">
         <header data-role="header">
             <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Cancel</a>
@@ -31,21 +37,16 @@
         <div class="ui-content" role="main">
             <h1>INPUT</h1>
             <div class="ui-field-contain">
-              <input type="number" name="textinput" id="textinput" placeholder="駐車番号を入力" />
+              <input type="text" name="textinput" id="parkingNumberInput" placeholder="駐車番号を入力" />
             </div>
             
             <p id="parkingTimeForInput">&#8250;&#8250; 01:33:29</p>
             
-            <!--
-            <a class="ui-btn ui-icon-carat-r ui-btn-icon-right" data-position-to="origin" data-transition="pop" href="#dateDialog">2014/4/7</a>
-            <a class="ui-btn ui-icon-carat-r ui-btn-icon-right" href="#timeDialog">16:32:24</a>
-            -->
-            
             <form>
                 <fieldset id="parkedDateTimeFieldSet" data-role="collapsible">
                     <legend>駐車時刻</legend>
-                    <input type="date" name="parkedDate" id="parkedDateInput" value="2014-04-07">
-                    <input type="time" name="parkedTime" id="parkedTimeInput" value="16:32">
+                    <input type="date" name="parkedDate" id="parkedDateInput" value="">
+                    <input type="time" name="parkedTime" id="parkedTimeInput" value="6:32">
                 </fieldset>
             </form>
             
@@ -54,6 +55,7 @@
         </div>
     </div>
     
+    <!-- park info page -->
     <div id="parkInfo" data-role="page">
         <header data-role="header">
             <h1>PARKIT</h1>
@@ -71,12 +73,5 @@
         
     </div>
     
-    <!--
-    <div data-role="popup" data-dialog="true" id="dateDialog">
-		<div class="ui-content" role="main">
-    			<h1>ダイアログ例</h1>
-  		</div>
-	</div>
-    -->
 </body>
 </html>
