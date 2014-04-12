@@ -2,6 +2,7 @@
 
 var storage = localStorage;
 var parkedDate = new Date();
+var parkingNumber = "";
 
 init();
 
@@ -18,9 +19,6 @@ function init() {
     $(document).delegate("#home", "pagecreate", displayHomePage);
     $(document).delegate("#parkInfoInput", "pagecreate", displayParkInfoInputPage);
     $(document).delegate("#parkInfo", "pagecreate", displayParkInfoPage);
-    
-    //var util = new DateUtil();
-    //console.log(util.getFullYearMonthDate(new Date()));
 }
 
 function setSessionStorage() {
@@ -33,68 +31,21 @@ function setSessionStorage() {
     }
 }
 
-/*
-function getParkingTimeString() {
-    var nowTime = new Date().getTime();
-
-    var passedSeconds = parseInt((nowTime - parkedDate.getTime()) / 1000);
-    var hour = parseInt(passedSeconds / 3600);
-    var min = parseInt((passedSeconds / 60) % 60);
-    var sec = passedSeconds % 60;
-
-    // 数値が1桁の場合、頭に0を付けて2桁で表示する指定
-    if(hour < 10) { hour = "0" + hour; }
-    if(min < 10) { min = "0" + min; }
-    if(sec < 10) { sec = "0" + sec; }
-    
-    return hour + ":" + min + ":" + sec;
-}
-*/
-
 function refreshCurrentDateTime() {
     var now = new Date();
-//    var nowString = now.toLocaleDateString() + " " + now.toLocaleTimeString();
-//    document.getElementById("refreshCurrentDateTime").innerHTML = nowString;
     document.getElementById("refreshCurrentDateTime").innerHTML = getFullYearMonthDate(now) + " " + getFullHourMinSec(now);
     setTimeout(refreshCurrentDateTime, 1000);    
 }
 
 function refreshParkingTime() {
-//    document.getElementById("parkingTimeForInput").innerHTML = getParkingTimeString();
-    document.getElementById("parkingTimeForInput").innerHTML = getPassingHourMinSec(parkedDate);
-    
+    document.getElementById("parkingTimeForInput").innerHTML = getPassingHourMinSec(parkedDate);    
     setTimeout(refreshParkingTime, 1000);
 }
 
 function refreshParkInfo() {
-    if (storage.length > 0) {
-        document.getElementById("parkingNumber").innerHTML = storage.getItem(storage.key(0));
-        var parkedTime = parseInt(storage.key(0));
-        var parkedDate = new Date(parkedTime);
-        
-        /*
-        var nowTime = new Date().getTime();
-
-        var passedSeconds = parseInt((nowTime - parkedTime) / 1000);
-        //alert(passedSeconds);
-        var hour = parseInt(passedSeconds / 3600);
-        var min = parseInt((passedSeconds / 60) % 60);
-        var sec = passedSeconds % 60;
-
-        // 数値が1桁の場合、頭に0を付けて2桁で表示する指定
-        if(hour < 10) { hour = "0" + hour; }
-        if(min < 10) { min = "0" + min; }
-        if(sec < 10) { sec = "0" + sec; }
-
-        document.getElementById("parkingTime").innerHTML = hour + ":" + min + ":" + sec;
-
-        document.getElementById("parkedTime").innerHTML = parkedDate.toLocaleDateString() + " " + parkedDate.toLocaleTimeString();
-        */
-        document.getElementById("parkingTime").innerHTML = getPassingHourMinSec(parkedDate);
-        document.getElementById("parkedTime").innerHTML = getFullYearMonthDate(parkedDate) + " " + getFullHourMinSec(parkedDate);
-
-        setTimeout(refreshParkInfo, 1000);
-    }
+    document.getElementById("parkingTime").innerHTML = getPassingHourMinSec(parkedDate);
+    document.getElementById("parkedTime").innerHTML = getFullYearMonthDate(parkedDate) + " " + getFullHourMinSec(parkedDate);
+    setTimeout(refreshParkInfo, 1000);
 }
 
 /**
@@ -121,30 +72,13 @@ function displayParkInfoInputPage() {
     refreshParkingTime();
     
     /* 駐車番号をフォームにセットする */
-    var parkNum = "";
-    if (storage.length > 0) {
-        parkNum = storage.getItem(storage.key(0));
-        alert("key was found");
+//    var parkNum = "";
+    if (parkingNumber == "" && storage.length > 0) {
+        parkingNumber = storage.getItem(storage.key(0));
     }
-    document.getElementById("parkingNumberInput").value = parkNum;
+    document.getElementById("parkingNumberInput").value = parkingNumber;
     
     /* 駐車時刻をフォームにセットする */
-    var year = parkedDate.getFullYear();
-    var month = parkedDate.getMonth() + 1;
-    var date = parkedDate.getDate();
-    var hour = parkedDate.getHours();
-    var min = parkedDate.getMinutes();
-    
-    month = month < 10 ? "0" + month : month;
-    date = date < 10 ? "0" + date : date;
-    hour = hour < 10 ? "0" + hour : hour;
-    min = min < 10 ? "0" + min : min;
-    
-    var dateValue = year + "-" + month + "-" + date;
-    var timeValue = hour + ":" + min;
-    
-//    document.getElementById("parkedDateInput").value = dateValue;
-//    document.getElementById("parkedTimeInput").value = timeValue;
     document.getElementById("parkedDateInput").value = getFullYearMonthDate(parkedDate);
     document.getElementById("parkedTimeInput").value = getFullHourMin(parkedDate);
 }
@@ -155,7 +89,15 @@ function displayParkInfoInputPage() {
 function displayParkInfoPage() {
     
     /* 駐車情報を表示する */
-    refreshParkInfo();
+    if (storage.length > 0) {
+        document.getElementById("parkingNumber").innerHTML = storage.getItem(storage.key(0));
+        if (parkedDate == null) {
+            parkedTime = parseInt(storage.key(0));
+            parkedDate = new Date(parkedTime);
+        }
+        
+        refreshParkInfo();
+    }
 }
 
 /**
@@ -179,6 +121,8 @@ function submitParkInfo() {
 
 function submitParkFinish() {
     storage.clear();
+    parkedDate = null;
+    parkingNumber = "";
     document.getElementById("parkingNumberInput").value = "";
 }
 
@@ -230,16 +174,20 @@ function getFullHourMinSec(date) {
 }
 
 function getPassingHourMinSec(date) {
+    if (date instanceof Date == false) {
+        console.error("引数がDateオブジェクトではありません。");
+        return;
+    }
     var nowTime = new Date().getTime();
 
     var passedSeconds = parseInt((nowTime - date.getTime()) / 1000);
-    var hour = parseInt(passedSeconds / 3600);
-    var min = parseInt((passedSeconds / 60) % 60);
-    var sec = passedSeconds % 60;
+    var hh = parseInt(passedSeconds / 3600);
+    var mm = parseInt((passedSeconds / 60) % 60);
+    var ss = passedSeconds % 60;
 
     // 数値が1桁の場合、頭に0を付けて2桁で表示する指定
-    if(hour < 10) { hour = "0" + hour; }
-    if(min < 10) { min = "0" + min; }
-    if(sec < 10) { sec = "0" + sec; }
+    hh = hh < 10 ? "0" + hh : hh;
+    mm = mm < 10 ? "0" + mm : mm;
+    ss = ss < 10 ? "0" + ss : ss;
     
-    return hour + ":" + min + ":" + sec;}
+    return hh + ":" + mm + ":" + ss;}
