@@ -80,7 +80,6 @@ function displayParkInfoInputPage() {
     refreshParkingTime();
     
     /* 駐車番号をフォームにセットする */
-//    var parkNum = "";
     if (parkingNumber === "" && storage.length > 0) {
         parkingNumber = storage.getItem(storage.key(0));
     }
