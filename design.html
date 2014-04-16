@@ -31,7 +31,7 @@
     <!-- park info input page -->
     <div id="parkInfoInput" data-role="page">
         <header data-role="header">
-            <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l">Cancel</a>
+            <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l" onclick="cancelParkInfoInput()">Cancel</a>
             <h1>PARKIT</h1>
         </header>
         <div class="ui-content" role="main">
@@ -45,8 +45,8 @@
             <form>
                 <fieldset id="parkedDateTimeFieldSet" data-role="collapsible">
                     <legend>駐車時刻</legend>
-                    <input type="date" name="parkedDate" id="parkedDateInput" value="">
-                    <input type="time" name="parkedTime" id="parkedTimeInput" value="6:32">
+                    <input type="date" name="parkedDate" id="parkedDateInput" value="" onchange="setTempParkedDate()">
+                    <input type="time" name="parkedTime" id="parkedTimeInput" value="" onchange="setTempParkedDate()">
                 </fieldset>
             </form>
             
@@ -59,7 +59,7 @@
     <div id="parkInfo" data-role="page">
         <header data-role="header">
             <h1>PARKIT</h1>
-            <a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-right ui-icon-carat-r" href="#parkInfoInput">Edit</a>
+            <a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-right ui-icon-carat-r" href="#parkInfoInput" onclick="editParkInfo()">Edit</a>
         </header>
         <div class="ui-content" role="main">
             <h1>PARKING INFO</h1>
