@@ -100,7 +100,7 @@ function displayParkInfoPage() {
     if (storage.length > 0) {
         document.getElementById("parkingNumber").innerHTML = storage.getItem(storage.key(0));
         if (parkedDate === null) {
-            parkedTime = parseInt(storage.key(0), 10);
+            var parkedTime = parseInt(storage.key(0), 10);
             parkedDate = new Date(parkedTime);
         }
         
