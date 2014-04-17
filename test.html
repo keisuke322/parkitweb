@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    
+    <script>
+        function clickHandler() {
+            var dateString = document.getElementById("input").value,
+                timeString = document.getElementById("input2").value,
+                testString = "2014-02-03" + " " + "11:10",
+                date = null,
+                date2 = null,
+                date3 = null,
+                date4 = null,
+                date5 = null;
+            date = new Date(dateString);
+            date2 = new Date(dateString + " " + timeString);
+            date3 = new Date(testString);
+            date4 = new Date(Date.parse(dateString + " " + timeString));
+            date5 = parseDateWithDateString(dateString + " " + timeString);
+            document.getElementById("result").innerHTML = dateString + " | " + timeString;
+            document.getElementById("result2").innerHTML = date.toLocaleDateString() + " " + date.toLocaleTimeString();
+            document.getElementById("result3").innerHTML = date2.toLocaleDateString() + " " + date2.toLocaleTimeString();
+            document.getElementById("result4").innerHTML = date3.toLocaleDateString() + " " + date3.toLocaleTimeString();
+            document.getElementById("result5").innerHTML = date4.toLocaleDateString() + " " + date4.toLocaleTimeString();
+            document.getElementById("result6").innerHTML = dateString + " " + timeString + " | " + Date.parse(dateString + " " + timeString);
+            document.getElementById("result7").innerHTML = date5.toLocaleDateString() + " " + date5.toLocaleTimeString();
+        }
+        
+        function parseDateWithDateString(value) {
+            "use strict";
+            
+            var array = value.split(/[- :]/),
+                date = null;
+            
+            if (array.length === 3) {
+                date = new Date(array[0], array[1] - 1, array[2]);
+            } else if (array.length === 5) {
+                date = new Date(array[0], array[1] - 1, array[2], array[3], array[4]);
+            } else if (array.length === 6) {
+                date = new Date(array[0], array[1] - 1, array[2], array[3], array[4], array[5]);
+            }
+            
+            return date;
+        }
+    
+    </script>
+</head>
+
+<body>
+<input type="date" id="input" name="input" />
+<input type="time" id="input2" name="input2" />
+<input type="button" value="test" onclick="clickHandler()" />
+<p id="result">here</p>
+<p id="result2">here</p>
+<p id="result3">here</p>
+<p id="result4">here</p>
+<p id="result5">here</p>
+<p id="result6">here</p>
+<p id="result7">here</p>
+</body>
+
+</html>

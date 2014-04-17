@@ -47,13 +47,7 @@ function setTempParkedDate() {
 
     var ymd = document.getElementById("parkedDateInput").value,
         hm = document.getElementById("parkedTimeInput").value;
-    _tempParkedDate = new Date(ymd + " " + hm + ":" + _parkedDate.getSeconds());
-}
-
-function getDate(yyyymmddString, hhmmString) {
-    "use strict";
-    
-    return new Date(dateString + " " + timeString);
+    _tempParkedDate = parseDateWithDateString(ymd + " " + hm + ":" + _parkedDate.getSeconds());
 }
 
 function refreshCurrentDateTime() {
@@ -264,4 +258,21 @@ function getPassingHourMinSec(date) {
     ss = ss < 10 ? "0" + ss : ss;
     
     return hh + ":" + mm + ":" + ss;
+}
+
+function parseDateWithDateString(value) {
+    "use strict";
+
+    var array = value.split(/[- :]/),
+        date = new Date(0);
+
+    if (array.length === 3) {
+        date = new Date(array[0], array[1] - 1, array[2]);
+    } else if (array.length === 5) {
+        date = new Date(array[0], array[1] - 1, array[2], array[3], array[4]);
+    } else if (array.length === 6) {
+        date = new Date(array[0], array[1] - 1, array[2], array[3], array[4], array[5]);
+    }
+
+    return date;
 }
