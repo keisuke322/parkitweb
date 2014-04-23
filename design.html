@@ -16,10 +16,12 @@
     <!-- home page -->
     <div id="home" data-role="page">
         <header data-role="header">
-            <h1>PARKIT</h1>
+            <h1>入庫</h1>
         </header>
         <div class="ui-content" role="main">
+            <!--
             <h1>Start</h1>
+            -->
             <a class="ui-btn" href="#parkInfoInput" onclick="submitPark()">
                 <img src="images/clock.svg"><br/>
                 <p id="refreshCurrentDateTime"></p>
@@ -31,11 +33,13 @@
     <!-- park info input page -->
     <div id="parkInfoInput" data-role="page">
         <header data-role="header">
-            <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l" onclick="cancelParkInfoInput()">Cancel</a>
-            <h1>PARKIT</h1>
+            <a href="#" data-rel="back" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-carat-l" onclick="cancelParkInfoInput()">キャンセル</a>
+            <h1>入力</h1>
         </header>
         <div class="ui-content" role="main">
+            <!--
             <h1>INPUT</h1>
+            -->
             <div class="ui-field-contain">
               <input type="text" name="textinput" id="parkingNumberInput" placeholder="駐車番号を入力" />
             </div>
@@ -58,11 +62,13 @@
     <!-- park info page -->
     <div id="parkInfo" data-role="page">
         <header data-role="header">
-            <h1>PARKIT</h1>
-            <a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-right ui-icon-carat-r" href="#parkInfoInput" onclick="editParkInfo()">Edit</a>
+            <h1>駐車情報</h1>
+            <a class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-btn-icon-right ui-icon-carat-r" href="#parkInfoInput" onclick="editParkInfo()">編集</a>
         </header>
         <div class="ui-content" role="main">
+            <!--
             <h1>PARKING INFO</h1>
+            -->
             <div class="ui-body">
                 <p id="parkingNumber">---</p>
                 <p id="parkingTime">00:00:00</p>
