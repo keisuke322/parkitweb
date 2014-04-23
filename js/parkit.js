@@ -1,6 +1,11 @@
 /*global $, console, init */
 /*jslint nomen: true */
 
+// Web Storageのキー
+const PARKING_NUMBER = "parkingNumber";
+const PARKED_TIME = "parkedTime";
+const PARKING_PHOTO_URI = "parkingPhotoUrl";
+
 var _storage = localStorage;
 var _parkedDate = new Date(0);
 var _tempParkedDate = new Date(0);
@@ -26,20 +31,6 @@ function init() {
     $(document).delegate("#parkInfoInput", "pagecreate", displayParkInfoInputPage);
     $(document).delegate("#parkInfo", "pagecreate", displayParkInfoPage);
 }
-
-/*
-function setLocalStorage() {
-    "use strict";
-    
-    var key = _tempParkedDate.getTime() == 0 ? _parkedDate.getTime() : _tempParkedDate.getTime(),
-        value = document.getElementById("parkingNumberInput").value;
-
-    if (key && value) {
-        _storage.clear();
-        _storage.setItem(key, value);
-    }
-}
-*/
 
 function setTempParkedDate() {
     "use strict";
@@ -97,7 +88,7 @@ function displayParkInfoInputPage() {
     
     /* 駐車番号をフォームにセットする */
     if (_parkingNumber === "" && _storage.length > 0) {
-        _parkingNumber = _storage.getItem(_storage.key(0));
+        _parkingNumber = _storage.getItem(PARKING_NUMBER);
     }
     document.getElementById("parkingNumberInput").value = _parkingNumber;
     
@@ -114,9 +105,9 @@ function displayParkInfoPage() {
     console.log("displayParkInfoPage()");
     /* 駐車情報を表示する */
     if (_storage.length > 0) {
-        document.getElementById("parkingNumber").innerHTML = _storage.getItem(_storage.key(0));
+        document.getElementById("parkingNumber").innerHTML = _storage.getItem(PARKING_NUMBER);
         if (_parkedDate.getTime() === 0) {
-            var parkedTime = parseInt(_storage.key(0), 10);
+            var parkedTime = parseInt(_storage.getItem(PARKED_TIME), 10);
             _parkedDate = new Date(parkedTime);
         }
         
@@ -146,9 +137,12 @@ function submitParkInfo() {
     _parkedDate = _tempParkedDate.getTime() == 0 ? _parkedDate : _tempParkedDate;
     _parkingNumber = document.getElementById("parkingNumberInput").value;
     
-    if (_parkedDate && _parkingNumber) {
-        _storage.clear();
-        _storage.setItem(_parkedDate.getTime(), _parkingNumber);
+    if (_parkedDate) {
+        _storage.setItem(PARKED_TIME, _parkedDate.getTime());
+    }
+    
+    if (_parkingNumber) {
+        _storage.setItem(PARKING_NUMBER, _parkingNumber);
     }
     
     
