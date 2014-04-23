@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    
+    <script>
+        
+        var _storage = localStorage;
+        
+        function clickHandler() {
+            if (!window.File) {
+                document.getElementById("result").innerHTML = "File API is not available on this browser";
+                return;
+            }
+            
+            var reader = new FileReader(),
+                value = null;
+            reader.onload = function(event) {
+                //document.getElementById("image").src = reader.result;
+                document.getElementById("result").innerHTML = reader.result + "/" + file.name;
+                
+                _storage.setItem("photourl", reader.result);
+            };
+            var file = document.getElementById("imageFile").files[0];
+            reader.readAsDataURL(file);
+            //reader.readAsText(file);
+        }
+        
+
+        function showPhoto() {
+            var photourl = _storage.getItem("photourl");
+            document.getElementById("image").src = photourl;
+        }
+    </script>
+</head>
+
+<body>
+
+<input type="file" accept="image/*" id="imageFile" />
+<input type="button" value="test" onclick="clickHandler()" />
+<img id="image" width="200" height="200" />
+<p id="result">here</p>
+<input type="button" value="show photo" onclick="showPhoto()" />
+
+</body>
+
+</html>
